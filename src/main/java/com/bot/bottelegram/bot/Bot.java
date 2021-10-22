@@ -22,6 +22,8 @@ public class Bot extends TelegramLongPollingBot {
     private String username;
     @Value("${telegram.bot.token}")
     private String token;
+    @Value("${telegram.bot.groupId}")
+    private String groupId;
 
     @Override
     public String getBotUsername() {
@@ -56,7 +58,7 @@ public class Bot extends TelegramLongPollingBot {
 
     public void sendNews() {
         SendMessage sm = new SendMessage();
-        sm.setChatId("-420779853"); // id de mi grupo
+        sm.setChatId(groupId); // id de mi grupo
         sm.setText(scraping.webScraping().stream().findFirst().get());
         send(sm);
 
